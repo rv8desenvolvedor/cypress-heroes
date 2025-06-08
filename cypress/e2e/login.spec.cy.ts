@@ -1,5 +1,3 @@
-import { contains } from "cypress/types/jquery";
-
 describe("Login Success/Fail spec", () => {
   it("Login - Success", () => {
     cy.visit("http://localhost:3000");
@@ -39,7 +37,7 @@ describe("Login Success/Fail spec", () => {
     cy.get("li > .undefined").click();
     cy.get(":nth-child(1) > .mb-2").should("contain", "Email");
     cy.get('[data-cy="email"]').click().type("12345");
-    cy.get('[data-cy="password"]').click().type("test456");
+    cy.get('[data-cy="password"]').click().type("test123");
     cy.get(".text-white").click();
     cy.get(".text-red-500").contains("Email is not valid");
   });
@@ -50,7 +48,7 @@ describe("Login Success/Fail spec", () => {
     cy.get("li > .undefined").click();
     cy.get(":nth-child(1) > .mb-2").should("contain", "Email");
     cy.get('[data-cy="email"]').click().type("lalalalalal");
-    cy.get('[data-cy="password"]').click().type("test456");
+    cy.get('[data-cy="password"]').click().type("test123");
     cy.get(".text-white").click();
     cy.get(".text-red-500").contains("Email is not valid");
   });
@@ -93,7 +91,10 @@ describe("Login Success/Fail spec", () => {
     cy.get('[src="/images/cyheroes-logo.svg"]');
     cy.get("li > .undefined").click();
     cy.get(".text-white").click();
-    cy.get(":nth-child(1) > .text-red-500").contains("Email is required");
-    cy.get(":nth-child(2) > .text-red-500").contains("Password is required");
+    cy.get(":nth-child(1) > .text-red-500").should(
+      "contain",
+      "Email is required",
+      "Password is required"
+    );
   });
 });
